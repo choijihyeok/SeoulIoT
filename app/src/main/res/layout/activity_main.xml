@@ -4,63 +4,72 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:theme="@android:style/Theme.Light"
     tools:context="com.example.ho_msi.myapplication.MainActivity">
 
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/linearLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
         <Button
             android:id="@+id/btn01"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="159dp"
             android:text="BTN_GET" />
 
         <TextView
             android:id="@+id/txt01"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="107dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="44dp"
             android:background="#f1f1f1"
-            android:text="TextView for GET"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:gravity="center_vertical"
+            android:textAlignment="center"
+            android:textColor="#ffff0000"
+            android:textSize="60dp" />
 
         <Button
             android:id="@+id/btn02"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="208dp"
             android:text="BTN_PUT" />
 
         <TextView
             android:id="@+id/txt02"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="214dp"
             android:background="#f1f1f1"
-            android:text="TextView for PUT"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:text="TextView for PUT" />
 
-    </LinearLayout>
 
-    <Button
-        android:id="@+id/newActivity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="460dp"
-        android:text="Map"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/newActivity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="460dp"
+            android:text="Map" />
+
+
+    </RelativeLayout>
+
+
 
 </android.support.constraint.ConstraintLayout>

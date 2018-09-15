@@ -9,11 +9,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.Console;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -33,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
     TextView txt1, txt2;
     Button btn1, btn2;
     ProgressDialog progressDialog;
+    //로그 콘솔
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
         btn2.setOnClickListener(btn2Listener); // RESTful API PUT
 
 
+        // 맵 전환하는 intent
         Button b = (Button)findViewById(R.id.newActivity);
         b.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -120,8 +125,14 @@ public class MainActivity extends AppCompatActivity {
 
                 StringBuffer buffer = new StringBuffer();
                 String line = "";
-                int FindIndex;
-                FindIndex = buffer.indexOf("value");
+
+
+
+
+
+
+
+
                 while ((line = reader.readLine()) != null) {
                     buffer.append(line+"\n");
                     Log.d("Response: ", "> " + line);
@@ -129,8 +140,24 @@ public class MainActivity extends AppCompatActivity {
 
                 }
 
-                return buffer.toString();
+                /////////////문자열 찾는 변수
+                int findIndex;
+                String subject = "value\":\"";
+                int subCnt = subject.length();
+                int updateTime = 0;
+                findIndex = buffer.indexOf(subject);
+                Log.d(TAG,"index succes!! ========== " + findIndex );
+                String foundData;
+                foundData = buffer.substring(findIndex+subCnt, (buffer.substring(findIndex).indexOf("\"")+findIndex+subCnt-1));
 
+
+
+
+//                foundData = foundData.replaceAll("[^0-9]","");
+                Log.d(TAG,"found string!");
+
+//                return buffer.toString();
+                return foundData.toString();
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();

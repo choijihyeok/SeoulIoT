@@ -30,7 +30,7 @@ public class mapActivity extends AppCompatActivity {
         });
 
         //선언
-        LinearLayout linearLayoutTmap = (LinearLayout)findViewById(R.id.map_view);
+        RelativeLayout linearLayoutTmap = (RelativeLayout)findViewById(R.id.map_view);
         TMapView tMapView = new TMapView(this);
 
         //키 값
