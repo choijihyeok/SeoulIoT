@@ -8,6 +8,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+
 
 
 import org.json.JSONException;
@@ -46,13 +49,13 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate");
 
         txt1 = (TextView) findViewById(R.id.txt01);
-        txt2 = (TextView) findViewById(R.id.txt02);
+//        txt2 = (TextView) findViewById(R.id.txt02);
 
         btn1 = (Button) findViewById(R.id.btn01);
-        btn2 = (Button) findViewById(R.id.btn02);
+//        btn2 = (Button) findViewById(R.id.btn02);
 
         btn1.setOnClickListener(btn1Listener); // RESTful API GET
-        btn2.setOnClickListener(btn2Listener); // RESTful API PUT
+//        btn2.setOnClickListener(btn2Listener); // RESTful API PUT
 
 
         // 맵 전환하는 intent
@@ -82,16 +85,16 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    private final View.OnClickListener btn2Listener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Log.d(TAG, "Btn2 OnClickListener");
-
-            new JsonTaskPUT().execute("https://api.sandbox.thingplus.net/v2/gateways/5ccf7fff21c6/sensors/led-5ccf7fff21c6-0/status");
-
-
-        }
-    };
+//    private final View.OnClickListener btn2Listener = new View.OnClickListener() {
+//        @Override
+//        public void onClick(View v) {
+//            Log.d(TAG, "Btn2 OnClickListener");
+//
+//            new JsonTaskPUT().execute("https://api.sandbox.thingplus.net/v2/gateways/5ccf7fff21c6/sensors/led-5ccf7fff21c6-0/status");
+//
+//
+//        }
+//    };
 
     private class JsonTaskGET extends AsyncTask<String, String, String> {
 
@@ -144,12 +147,28 @@ public class MainActivity extends AppCompatActivity {
                 int findIndex;
                 String subject = "value\":\"";
                 int subCnt = subject.length();
-                int updateTime = 0;
+                String updateTime;
                 findIndex = buffer.indexOf(subject);
                 Log.d(TAG,"index succes!! ========== " + findIndex );
+                Log.d(TAG, "index success!! ============ end " + buffer.indexOf("\"mtime"));
                 String foundData;
-                foundData = buffer.substring(findIndex+subCnt, (buffer.substring(findIndex).indexOf("\"")+findIndex+subCnt-1));
+                foundData = buffer.substring(findIndex+subCnt, buffer.indexOf("\",\"mtime"));
+                int timeIndex = buffer.indexOf("time");
+                updateTime = buffer.substring( timeIndex + 4 , buffer.indexOf("\",\"value"));
 
+                Log.d(TAG,"Time !!! : !!! "+updateTime);
+                //시간 계산
+//                long updateIntTime = Long.parseLong(updateTime);
+//                Log.d(TAG,"Time !!! : !!! ");
+//                int seconds = (int) (updateIntTime / 1000) % 60 ;            //초
+//                Log.d(TAG,"Time !!! : !!! ");
+//                int minutes = (int) ((updateIntTime / (1000*60)) % 60);  //분
+//                Log.d(TAG,"Time !!! : !!! ");
+//                int hours   = (int) ((updateIntTime / (1000*60*60)) % 24);//시
+//                Log.d(TAG,"Time !!! : !!! ");
+
+                Log.d(TAG,"====== : " + hours + "========= : " + minutes + "========= : " + seconds);
+                Log.d(TAG,"Time !!! : !!! "+updateTime);
 
 
 
@@ -188,90 +207,90 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private class JsonTaskPUT extends AsyncTask<String, String, String> {
-
-        protected void onPreExecute() {
-            super.onPreExecute();
-
-            progressDialog = new ProgressDialog(MainActivity.this);
-            progressDialog.setMessage("Please wait");
-            progressDialog.setCancelable(false);
-            progressDialog.show();
-        }
-
-        protected String doInBackground(String... params) {
-
-            HttpURLConnection connection = null;
-            BufferedReader reader = null;
-            BufferedWriter writer = null;
-
-            try {
-                URL url = new URL(params[0]);
-                connection = (HttpURLConnection) url.openConnection();
-                connection.setDoOutput(true);
-                connection.setRequestProperty("Content-Type","application/json");
-
-                connection.setRequestMethod("PUT");
-                connection.addRequestProperty("Authorization", "Bearer " + ACCESS_TOKEN);
-                connection.setRequestProperty("Accept", "application/json");
-
-                connection.connect();
-
-                JSONObject jsonObject = new JSONObject();
-                jsonObject.put("value", "off");
-                jsonObject.put("validDuration", 2000);
-
-                OutputStreamWriter out = new   OutputStreamWriter(connection.getOutputStream());
-                out.write(jsonObject.toString());
-                out.close();
-
-                StringBuilder sb = new StringBuilder();
-                int HttpResult = connection.getResponseCode();
-                if(HttpResult == HttpURLConnection.HTTP_OK){
-                    BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream(),"utf-8"));
-                    String line = null;
-                    while ((line = br.readLine()) != null) {
-                        sb.append(line + "\n");
-                    }
-                    br.close();
-
-                    Log.d(TAG, ""+sb.toString());
-
-                }else{
-
-                    Log.d(TAG, ""+sb.toString());
-                }
-
-                return String.valueOf(sb);
-
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } finally {
-                if (connection != null) {
-                    connection.disconnect();
-                }
-                try {
-                    if (reader != null) {
-                        reader.close();
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
-            if (progressDialog.isShowing()){
-                progressDialog.dismiss();
-            }
-            txt2.setText(result);
-        }
-    }
+//    private class JsonTaskPUT extends AsyncTask<String, String, String> {
+//
+//        protected void onPreExecute() {
+//            super.onPreExecute();
+//
+//            progressDialog = new ProgressDialog(MainActivity.this);
+//            progressDialog.setMessage("Please wait");
+//            progressDialog.setCancelable(false);
+//            progressDialog.show();
+//        }
+//
+//        protected String doInBackground(String... params) {
+//
+//            HttpURLConnection connection = null;
+//            BufferedReader reader = null;
+//            BufferedWriter writer = null;
+//
+//            try {
+//                URL url = new URL(params[0]);
+//                connection = (HttpURLConnection) url.openConnection();
+//                connection.setDoOutput(true);
+//                connection.setRequestProperty("Content-Type","application/json");
+//
+//                connection.setRequestMethod("PUT");
+//                connection.addRequestProperty("Authorization", "Bearer " + ACCESS_TOKEN);
+//                connection.setRequestProperty("Accept", "application/json");
+//
+//                connection.connect();
+//
+//                JSONObject jsonObject = new JSONObject();
+//                jsonObject.put("value", "off");
+//                jsonObject.put("validDuration", 2000);
+//
+//                OutputStreamWriter out = new   OutputStreamWriter(connection.getOutputStream());
+//                out.write(jsonObject.toString());
+//                out.close();
+//
+//                StringBuilder sb = new StringBuilder();
+//                int HttpResult = connection.getResponseCode();
+//                if(HttpResult == HttpURLConnection.HTTP_OK){
+//                    BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream(),"utf-8"));
+//                    String line = null;
+//                    while ((line = br.readLine()) != null) {
+//                        sb.append(line + "\n");
+//                    }
+//                    br.close();
+//
+//                    Log.d(TAG, ""+sb.toString());
+//
+//                }else{
+//
+//                    Log.d(TAG, ""+sb.toString());
+//                }
+//
+//                return String.valueOf(sb);
+//
+//            } catch (MalformedURLException e) {
+//                e.printStackTrace();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            } finally {
+//                if (connection != null) {
+//                    connection.disconnect();
+//                }
+//                try {
+//                    if (reader != null) {
+//                        reader.close();
+//                    }
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//            return null;
+//        }
+//
+//        @Override
+//        protected void onPostExecute(String result) {
+//            super.onPostExecute(result);
+//            if (progressDialog.isShowing()){
+//                progressDialog.dismiss();
+//            }
+//            txt2.setText(result);
+//        }
+//    }
 }

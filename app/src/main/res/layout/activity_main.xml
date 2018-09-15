@@ -32,30 +32,14 @@
             android:layout_width="match_parent"
             android:layout_height="107dp"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="44dp"
             android:background="#f1f1f1"
             android:gravity="center_vertical"
             android:textAlignment="center"
-            android:textColor="#ffff0000"
-            android:textSize="60dp" />
+            />
+            <!--android:layout_marginTop="44dp"-->
+            <!--android:textColor="#ffff0000"-->
+            <!--android:textSize="60dp" />-->
 
-        <Button
-            android:id="@+id/btn02"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="208dp"
-            android:text="BTN_PUT" />
-
-        <TextView
-            android:id="@+id/txt02"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="214dp"
-            android:background="#f1f1f1"
-            android:text="TextView for PUT" />
 
 
         <Button
