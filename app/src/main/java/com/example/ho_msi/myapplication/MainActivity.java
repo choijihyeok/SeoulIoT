@@ -23,6 +23,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
+import android.content.Intent;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -48,6 +49,19 @@ public class MainActivity extends AppCompatActivity {
 
         btn1.setOnClickListener(btn1Listener); // RESTful API GET
         btn2.setOnClickListener(btn2Listener); // RESTful API PUT
+
+
+        Button b = (Button)findViewById(R.id.newActivity);
+        b.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(
+                        getApplicationContext(),
+                        mapActivity.class);
+                    startActivity(intent);
+            }
+        });
+
 
     }
 

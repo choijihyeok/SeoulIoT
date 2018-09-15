@@ -2,8 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.ho_msi.myapplication">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    //internet permission
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>ㅕ
+    //T map api permission
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -18,6 +20,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".mapActivity"></activity>
     </application>
 
 </manifest>
