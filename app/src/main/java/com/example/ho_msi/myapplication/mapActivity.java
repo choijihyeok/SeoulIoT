@@ -162,7 +162,7 @@ public class mapActivity extends AppCompatActivity implements TMapGpsManager.onL
         tmapgps.setMinDistance(5);
         tmapgps.setProvider(tmapgps.NETWORK_PROVIDER);
 
-        tmapgps.OpenGps();
+//        tmapgps.OpenGps();
 //        Location L1 = null;
 //        Log.d(TAG ,""+ L1.getLatitude() + L1.getLongitude());
 
